@@ -1,0 +1,21 @@
+<h1>Pesquisa de Cidades</h1>
+
+<%= form_with url: cities_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :state_id, 'Estado' %>
+    <%= select_tag :state_id, options_from_collection_for_select(State.all, :id, :name, params[:state_id]) %>
+  </div>
+  <div>
+    <%= label_tag :name, 'Nome da Cidade' %>
+    <%= text_field_tag :name, params[:name] %>
+  </div>
+  <div>
+    <%= submit_tag 'Pesquisar' %>
+  </div>
+<% end %>
+
+<ul>
+  <% @cities.each do |city| %>
+    <li><%= city.name %> - <%= city.state.name %></li>
+  <% end %>
+</ul>
